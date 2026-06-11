@@ -5,7 +5,7 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "3307:3306"
+      - "3333:3306"
     command:
       - mysqld
       - --character-set-server=utf8mb4
@@ -27,7 +27,7 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/$${dudara_tomasz_k05_spring}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/$${MYSQL_DATABASE}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     ports:
       - "8080:8080"
     depends_on:
