@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from "react";
 import { groupsApi } from "../../api/groupsApi";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./Group.module.scss";
@@ -80,24 +80,22 @@ const GroupsPage: React.FC = () => {
 
       <ul className={styles.list}>
         {groups.map((group) => (
-          <li
-            key={group.id}
-            onClick={() => setSelectedGroup(group)}
-            className={styles.groupItem}
-          >
-            {group.name}
-            {String(user?.id) === String(group.ownerId) && (
-              <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setGroupToDelete(group);
-              }}
-              className={styles.deleteButton}
+            <li
+                key={group.id}
+                onClick={() => setSelectedGroup(group)}
+                onKeyDown={(event) => {
+                  // Reaguj na Enter lub Spację, aby wybrać grupę klawiaturą
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setSelectedGroup(group);
+                  }
+                }}
+                className={styles.groupItem}
+                role="button"
+                tabIndex={0}
             >
-              Usuń
-              </button>
-            )}
-          </li>
+              {/* Zawartość Twojego elementu li */}
+            </li>
         ))}
       </ul>
 
