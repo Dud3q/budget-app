@@ -23,26 +23,38 @@ const ConfirmModal = ({
   if (!visible) return null;
 
   return (
-    <div className={styles.modalOverlay} role="presentation" onClick={onCancel}>
       <div
-        className={styles.modal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="confirm-modal-title"
-        onClick={(event) => event.stopPropagation()}
+          className={styles.modalOverlay}
+          role="button"
+          tabIndex={0}
+          onClick={onCancel}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+              event.preventDefault();
+              onCancel();
+            }
+          }}
       >
-        <h3 id="confirm-modal-title">{title}</h3>
-        <p>{message}</p>
-        <div className={styles.actions}>
-          <button type="button" className={styles.cancel} onClick={onCancel}>
-            {cancelLabel}
-          </button>
-          <button type="button" className={styles.confirm} onClick={onConfirm}>
-            {confirmLabel}
-          </button>
+        <div
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-modal-title"
+            onClick={(event) => event.stopPropagation()}
+            onKeyDown={(event) => event.stopPropagation()}
+        >
+          <h3 id="confirm-modal-title">{title}</h3>
+          <p>{message}</p>
+          <div className={styles.actions}>
+            <button type="button" className={styles.cancel} onClick={onCancel}>
+              {cancelLabel}
+            </button>
+            <button type="button" className={styles.confirm} onClick={onConfirm}>
+              {confirmLabel}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 
